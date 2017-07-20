@@ -75,11 +75,11 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
+   production:
+     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: survey-bot_production
-  username: survey-bot
-  password: <%= ENV['SURVEY-BOT_DATABASE_PASSWORD'] %>
+#production:
+  #<<: *default
+  #database: d4iru9lauijms3
+  #username: survey-bot
+  #password: <%= ENV['SURVEY-BOT_DATABASE_PASSWORD'] %>
