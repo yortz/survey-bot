@@ -12,7 +12,7 @@ Bot.on :postback do |postback|
   messenger_id = postback.sender['id']
   get_user(messenger_id)
   execute_survey(postback)
-end 
+end
 
 
 def execute_survey postback
@@ -69,7 +69,7 @@ def execute_survey postback
   end
 end
 
-def ask_zeroth_question postback 
+def ask_zeroth_question postback
   postback.reply(
     attachment: {
       type: 'template',
@@ -83,7 +83,7 @@ def ask_zeroth_question postback
       }
     }
   )
-end 
+end
 
 def ask_first_question postback
   postback.reply(
@@ -121,25 +121,25 @@ end
 
 def show_result postback, user
   #Get sesult from User model
-  surname = user.first_name 
+  surname = user.first_name
   result = user.get_answers
-  postback.reply(text: "Ok #{surname}, Here are your answers to the questions") 
-  postback.reply(text: "#{result}") 
+  postback.reply(text: "Ok #{surname}, Here are your answers to the questions")
+  postback.reply(text: "#{result}")
 end
 
 def exit_survey postback
     # you can also send photos by including a URL in the payload response
-    postback.reply( 
+    postback.reply(
     attachment: {
       type: 'image',
       payload: {
         url: 'http://s2.quickmeme.com/img/ee/ee71aaef710f28451bb40f142ce53d35ce50405caafdfdb53e73417fc2619af3.jpg'
       }
     }
-  ) 
+  )
 end
 
-# User Functionality 
+# User Functionality
 def get_user messenger_id
   @user = User.where(messenger_id: messenger_id).first
   # If user does not exist, create new
@@ -151,12 +151,12 @@ def set_answer user
   @answer = Answer.where(user_id: user_id).first
   # If answer does not exist, create new
   create_new_answer(user_id) unless @answer
-end 
+end
 
 def create_new_answer(user_id)
   @answer = Answer.new(user_id: user_id)
   @answer.save
-end 
+end
 
 def create_new_user(messenger_id)
   @user = User.new(messenger_id: messenger_id)
