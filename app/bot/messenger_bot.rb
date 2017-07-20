@@ -22,7 +22,7 @@ def execute_survey postback
   case answer
   when "START_USER_SURVEY"
     puts 'Ask zeroth question'
-    ask_zeroth_question(postbacki, @user)
+    ask_zeroth_question(postback, @user)
   when "EXIT"
     exit_survey(postback)
   when "START"
@@ -75,7 +75,7 @@ def ask_zeroth_question( postback, user )
       type: 'template',
       payload: {
         template_type: 'button',
-        text: "Ciao #{user} !!! <br /> Questa è una \"proof of concept\" di quello pensavo potesse essere il bot. Pronta per iniziare?",
+        text: "Ciao!!! #{user}!!! <br /> Questa è una \"proof of concept\" di quello pensavo potesse essere il bot. Pronta per iniziare?",
         buttons: [
           { type: 'postback', title: 'Lets go!', payload: 'START' },
           { type: 'postback', title: 'No thanks', payload: 'EXIT' }
