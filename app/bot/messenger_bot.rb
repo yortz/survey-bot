@@ -6,6 +6,7 @@ include Facebook::Messenger
 Bot.on :message do |message|
   messenger_id = message.sender['id']
   get_user(messenger_id)
+  message.reply(text: "Ciao #{@user} !!! <br /> Questa è una \"proof of concept\" di quello pensavo potesse essere il bot")
 end
 
 Bot.on :postback do |postback|
