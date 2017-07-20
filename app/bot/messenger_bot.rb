@@ -11,7 +11,6 @@ end
 Bot.on :postback do |postback|
   messenger_id = postback.sender['id']
   get_user(messenger_id)
-  message.text = "Ciao #{@user} !!! <br /> Questa è una \"proof of concept\" di quello pensavo potesse essere il bot"
   execute_survey(postback)
 end
 
@@ -23,7 +22,7 @@ def execute_survey postback
   case answer
   when "START_USER_SURVEY"
     puts 'Ask zeroth question'
-    ask_zeroth_question(postback)
+    ask_zeroth_question(postbacki, @user)
   when "EXIT"
     exit_survey(postback)
   when "START"
@@ -70,13 +69,13 @@ def execute_survey postback
   end
 end
 
-def ask_zeroth_question postback
+def ask_zeroth_question( postback, user )
   postback.reply(
     attachment: {
       type: 'template',
       payload: {
         template_type: 'button',
-        text: 'Ready to get started with the survey?',
+        text: "Ciao #{user} !!! <br /> Questa è una \"proof of concept\" di quello pensavo potesse essere il bot. Pronta per iniziare?",
         buttons: [
           { type: 'postback', title: 'Lets go!', payload: 'START' },
           { type: 'postback', title: 'No thanks', payload: 'EXIT' }
