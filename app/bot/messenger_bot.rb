@@ -94,7 +94,7 @@ def ask_zeroth_question( postback, user )
       type: 'template',
       payload: {
         template_type: 'button',
-        text: "Ciao!!! <strong>#{user.first_name}</strong>!!!Questa è una \"proof of concept\" di quello pensavo potesse essere il bot. Pronta per iniziare?",
+        text: "Ciao!!! #{user.first_name}!!!Questa è una \"proof of concept\" di quello pensavo potesse essere il bot. Pronta per iniziare?",
         buttons: [
           { type: 'postback', title: 'Ci sto!', payload: 'START' },
           { type: 'postback', title: 'Mi è scesa la catena...', payload: 'EXIT' }
@@ -127,11 +127,11 @@ def ask_second_question postback
       type: 'template',
       payload: {
         template_type: 'button',
-        text: 'This is the second question. It works just like the first one ;)',
+        text: 'Scelta interessante! e Romeo? cosa fa?',
         buttons: [
-          { type: 'postback', title: 'Button one', payload: 'ANSWER_TWO_ONE' },
-          { type: 'postback', title: 'Button two', payload: 'ANSWER_TWO_TWO' },
-          { type: 'postback', title: 'Button three', payload: 'ANSWER_TWO_THREE' }
+          { type: 'postback', title: 'Tradisce Giulietta con la sua migliore amica', payload: 'ANSWER_TWO_ONE' },
+          { type: 'postback', title: 'Parte per la Danimarca', payload: 'ANSWER_TWO_TWO' },
+          { type: 'postback', title: 'Sposa Giulietta e divorzia dopo 3 mesei', payload: 'ANSWER_TWO_THREE' }
         ]
       }
     }
@@ -142,7 +142,7 @@ def show_result postback, user
   #Get sesult from User model
   surname = user.first_name
   result = user.get_answers
-  postback.reply(text: "Ok #{surname}, Here are your answers to the questions")
+  postback.reply(text: "Ok #{surname}, ecco qui i risultati")
   postback.reply(text: "#{result}")
 end
 
