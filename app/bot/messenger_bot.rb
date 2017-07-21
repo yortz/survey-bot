@@ -26,6 +26,9 @@ def execute_survey postback
   when "EXIT"
     exit_survey(postback)
   when "START"
+    puts "guidelines"
+    read_guidelines(postback)
+  when "CONTINUE"
     puts 'Ask first question'
     ask_first_question(postback)
   when "ANSWER_ONE_ONE"
@@ -69,16 +72,32 @@ def execute_survey postback
   end
 end
 
+def read_guidelines(postback)
+  postback.reply(
+    attachment: {
+      type: 'template',
+      payload: {
+        template_type: 'button',
+        text: "A breve ti sottoporremo una serie di domande a cui risponder:tu scegli l'opzione migliore per te e per lo svolgimento della rappresentazione in corso.
+              Gli attori non conoscono la tua scelta, sei tu a decidere come si svolgeranno gli eventi...Pronti?",
+        buttons: [
+          { type: 'postback', title: 'Continua', payload: 'CONTINUE' },
+        ]
+      }
+    }
+  )
+end
+
 def ask_zeroth_question( postback, user )
   postback.reply(
     attachment: {
       type: 'template',
       payload: {
         template_type: 'button',
-        text: "Ciao!!! #{user}!!! <br /> Questa è una \"proof of concept\" di quello pensavo potesse essere il bot. Pronta per iniziare?",
+        text: "Ciao!!! <strong>#{user.first_name}</strong>!!!Questa è una \"proof of concept\" di quello pensavo potesse essere il bot. Pronta per iniziare?",
         buttons: [
-          { type: 'postback', title: 'Lets go!', payload: 'START' },
-          { type: 'postback', title: 'No thanks', payload: 'EXIT' }
+          { type: 'postback', title: 'Ci sto!', payload: 'START' },
+          { type: 'postback', title: 'Mi è scesa la catena...', payload: 'EXIT' }
         ]
       }
     }
@@ -91,11 +110,11 @@ def ask_first_question postback
       type: 'template',
       payload: {
         template_type: 'button',
-        text: 'This is the first question. It has three buttons to answer from',
+        text: 'Che fine fa Giulietta?',
         buttons: [
-          { type: 'postback', title: 'Button one', payload: 'ANSWER_ONE_ONE' },
-          { type: 'postback', title: 'Button two', payload: 'ANSWER_ONE_TWO' },
-          { type: 'postback', title: 'Button three', payload: 'ANSWER_ONE_THREE' }
+          { type: 'postback', title: 'Vive?', payload: 'ANSWER_ONE_ONE' },
+          { type: 'postback', title: 'Muore?', payload: 'ANSWER_ONE_TWO' },
+          { type: 'postback', title: 'Sposa Romeo?', payload: 'ANSWER_ONE_THREE' }
         ]
       }
     }
