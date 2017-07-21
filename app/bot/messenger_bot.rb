@@ -147,6 +147,7 @@ def show_result postback, user
   end.join("\s")
   postback.reply(text: "Ok #{surname}, ecco qui i risultati")
   postback.reply(text: "RISULTATI: #{results}")
+  postback.reply( buttons: [ { type: 'postback', title: 'Da capo?', payload: 'CONTINUE' } ])
 end
 
 def exit_survey postback
