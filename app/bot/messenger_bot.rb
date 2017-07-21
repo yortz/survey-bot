@@ -141,9 +141,10 @@ end
 def show_result postback, user
   #Get sesult from User model
   surname = user.first_name
-  result = user.get_answers
+  answers_group_count = (1..2).map {|n| Answer.results_for("answer_#{n.humanize}") } #user.get_answers
+  results = answers_group_count.map { |a| "Domanda #{a.keys.first.to_i} => #{a.values} "  }
   postback.reply(text: "Ok #{surname}, ecco qui i risultati")
-  postback.reply(text: "#{result}")
+  postback.reply(text: "#{results}")
 end
 
 def exit_survey postback
